@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Luas Bangun Datar</title>
+    <style>
+        /* CSS untuk tampilan halaman */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, #3f87a6, #ebf8e1, #f69d3c);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #000000;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 2em;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            width: 400px; /* Lebar container diperbesar */
+            margin: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25), 0px 5px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            
+        }
+
+        .container:hover {
+            transform: translateY(-10px); /* Efek hover membuat container melayang */
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.3), 0px 10px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        label, button {
+            display: block;
+            margin-top: 15px;
+            font-size: 1em;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background: linear-gradient(135deg, #f76b1c, #f6aa3c);
+            color: #fff;
+            font-weight: bold;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #f6aa3c, #f76b1c);
+            transform: translateY(-3px);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .result {
+            font-weight: bold;
+            color: #f76b1c;
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        .explanation {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 10px;
+            background: #f3f3f3;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Kalkulator Luas Bangun Datar</h1>
+
+<!-- Segitiga -->
+<div class="container">
+    <h2>Luas Segitiga</h2>
+    <p class="explanation">Rumus luas segitiga: Luas = (1/2) × alas × tinggi</p>
+    <label for="triangle-base">Alas (a):</label>
+    <input type="number" id="triangle-base" placeholder="Masukkan alas">
+    <label for="triangle-height">Tinggi (t):</label>
+    <input type="number" id="triangle-height" placeholder="Masukkan tinggi">
+    <button onclick="calculateTriangle()">Hitung Luas</button>
+    <p class="result" id="triangle-result"></p>
+</div>
+
+<!-- Jajaran Genjang -->
+<div class="container">
+    <h2>Luas Jajaran Genjang</h2>
+    <p class="explanation">Rumus luas jajaran genjang: Luas = alas × tinggi</p>
+    <label for="parallelogram-base">Alas (a):</label>
+    <input type="number" id="parallelogram-base" placeholder="Masukkan alas">
+    <label for="parallelogram-height">Tinggi (t):</label>
+    <input type="number" id="parallelogram-height" placeholder="Masukkan tinggi">
+    <button onclick="calculateParallelogram()">Hitung Luas</button>
+    <p class="result" id="parallelogram-result"></p>
+</div>
+
+<!-- Bujur Sangkar -->
+<div class="container">
+    <h2>Luas Bujur Sangkar</h2>
+    <p class="explanation">Rumus luas bujur sangkar: Luas = sisi × sisi</p>
+    <label for="square-side">Sisi (s):</label>
+    <input type="number" id="square-side" placeholder="Masukkan sisi">
+    <button onclick="calculateSquare()">Hitung Luas</button>
+    <p class="result" id="square-result"></p>
+</div>
+
+<!-- Lingkaran -->
+<div class="container">
+    <h2>Luas Lingkaran</h2>
+    <p class="explanation">Rumus luas lingkaran: Luas = π × jari-jari²</p>
+    <label for="circle-radius">Jari-jari (r):</label>
+    <input type="number" id="circle-radius" placeholder="Masukkan jari-jari">
+    <button onclick="calculateCircle()">Hitung Luas</button>
+    <p class="result" id="circle-result"></p>
+</div>
+
+<!-- Trapesium -->
+<div class="container">
+    <h2>Luas Trapesium</h2>
+    <p class="explanation">Rumus luas trapesium: Luas = (1/2) × (alas 1 + alas 2) × tinggi</p>
+    <label for="trapezium-base1">Alas 1 (a):</label>
+    <input type="number" id="trapezium-base1" placeholder="Masukkan alas 1">
+    <label for="trapezium-base2">Alas 2 (b):</label>
+    <input type="number" id="trapezium-base2" placeholder="Masukkan alas 2">
+    <label for="trapezium-height">Tinggi (t):</label>
+    <input type="number" id="trapezium-height" placeholder="Masukkan tinggi">
+    <button onclick="calculateTrapezium()">Hitung Luas</button>
+    <p class="result" id="trapezium-result"></p>
+</div>
+
+<footer>
+    <p>&copy; 2024 Lucky Studio. Naffahal Lucky Mubarok NIM 231240001423</p>
+</footer>
+
+<script>
+    // Menghitung luas segitiga
+    function calculateTriangle() {
+        const base = parseFloat(document.getElementById("triangle-base").value);
+        const height = parseFloat(document.getElementById("triangle-height").value);
+        const area = 0.5 * base * height;
+        document.getElementById("triangle-result").innerText = "Luas Segitiga: " + area.toFixed(2) + " satuan²";
+    }
+
+    // Menghitung luas jajaran genjang
+    function calculateParallelogram() {
+        const base = parseFloat(document.getElementById("parallelogram-base").value);
+        const height = parseFloat(document.getElementById("parallelogram-height").value);
+        const area = base * height;
+        document.getElementById("parallelogram-result").innerText = "Luas Jajaran Genjang: " + area.toFixed(2) + " satuan²";
+    }
+
+    // Menghitung luas bujur sangkar
+    function calculateSquare() {
+        const side = parseFloat(document.getElementById("square-side").value);
+        const area = side * side;
+        document.getElementById("square-result").innerText = "Luas Bujur Sangkar: " + area.toFixed(2) + " satuan²";
+    }
+
+    // Menghitung luas lingkaran
+    function calculateCircle() {
+        const radius = parseFloat(document.getElementById("circle-radius").value);
+        const area = Math.PI * radius * radius;
+        document.getElementById("circle-result").innerText = "Luas Lingkaran: " + area.toFixed(2) + " satuan²";
+    }
+
+    // Menghitung luas trapesium
+    function calculateTrapezium() {
+        const base1 = parseFloat(document.getElementById("trapezium-base1").value);
+        const base2 = parseFloat(document.getElementById("trapezium-base2").value);
+        const height = parseFloat(document.getElementById("trapezium-height").value);
+        const area = 0.5 * (base1 + base2) * height;
+        document.getElementById("trapezium-result").innerText = "Luas Trapesium: " + area.toFixed(2) + " satuan²";
+    }
+</script>
+
+</body>
+</html>
